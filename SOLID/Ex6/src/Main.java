@@ -9,11 +9,23 @@ public class Main {
         NotificationSender sms = new SmsSender(audit);
         NotificationSender wa = new WhatsAppSender(audit);
 
-        email.send(n);
-        sms.send(n);
+        try {
+            email.send(n);
+        } catch (NotificationException ex) {
+            System.out.println("EMAIL ERROR: " + ex.getMessage());
+            audit.add("email failed");
+        }
+
+        try {
+            sms.send(n);
+        } catch (NotificationException ex) {
+            System.out.println("SMS ERROR: " + ex.getMessage());
+            audit.add("sms failed");
+        }
+
         try {
             wa.send(n);
-        } catch (RuntimeException ex) {
+        } catch (NotificationException ex) {
             System.out.println("WA ERROR: " + ex.getMessage());
             audit.add("WA failed");
         }

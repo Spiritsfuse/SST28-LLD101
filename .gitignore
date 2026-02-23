@@ -13,3 +13,15 @@ Thumbs.db
 tmp/
 out/
 build/
+ 
+# Personal learning and notes 
+SOLID/LLD_MASTER.md
+
+# Per-exercise solution notes
+SOLID/*/SOLUTION.md
+
+# Ignore exercises we will handle later
+SOLID/Ex7/
+SOLID/Ex8/
+SOLID/Ex9/
+SOLID/Ex10/
