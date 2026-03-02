@@ -17,11 +17,19 @@ build/
 # Personal learning and notes 
 SOLID/LLD_MASTER.md
 
-# Per-exercise solution notes
+# Per-exercise and per-assignment solution notes
 SOLID/*/SOLUTION.md
+immutable-tickets/SOLUTION.md
+singleton-metrics/SOLUTION.md
 
-# Ignore exercises we will handle later
-SOLID/Ex7/
-SOLID/Ex8/
-SOLID/Ex9/
-SOLID/Ex10/
+# Explanation and learning documentation
+Singleton_Demo/EXPLANATION.md
+**/README_LEARNING.md
+**/*_EXPLANATION.md
+GIT_GITHUB_MASTER.md
+
+# Ignore exercises we will handle later (now refactored)
+# SOLID/Ex7/
+# SOLID/Ex8/
+# SOLID/Ex9/
+# SOLID/Ex10/
