@@ -1,6 +1,6 @@
-package com.example.metrics;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Attempts to create multiple instances via reflection.
@@ -18,8 +18,12 @@ public class ReflectionAttack {
             System.out.println("Singleton identity: " + System.identityHashCode(singleton));
             System.out.println("Evil identity     : " + System.identityHashCode(evil));
             System.out.println("Same object?      : " + (singleton == evil));
-        } catch (Exception ex) {
-            System.out.println("Reflection blocked: " + ex.getCause().getMessage());
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {
+            if (ex.getCause() != null) {
+                System.out.println("Reflection blocked: " + ex.getCause().getMessage());
+            } else {
+                System.out.println("Reflection blocked: " + ex.getMessage());
+            }
         }
     }
 }

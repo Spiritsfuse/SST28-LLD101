@@ -1,5 +1,3 @@
-// Default package (no package declaration) - at root level for simplicity
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +12,8 @@ import java.util.List;
  * 4) defensive copy on input: caller cannot hold internal references.
  * 5) defensive copy on output: caller cannot mutate internal collections.
  *
- * Builder is used to avoid telescoping constructors and to make optional fields explicit.
+ * Builder is used to avoid telescoping constructors and to make optional fields
+ * explicit.
  */
 public final class DemoImmutable {
     private final int a;

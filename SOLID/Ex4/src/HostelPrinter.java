@@ -1,4 +1,3 @@
-import java.util.*;
 
 public class HostelPrinter {
     public void print(BookingRequest req, Money monthly, Money deposit) {

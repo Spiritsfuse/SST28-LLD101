@@ -42,10 +42,8 @@ public class SerializationGuardDemo implements Serializable {
         
         System.out.println("\n2. Serializing the singleton to bytes...");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
+        try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
             oos.writeObject(original);
-            oos.close();
             System.out.println("   Serialized (" + baos.size() + " bytes)");
         } catch (IOException e) {
             System.out.println("   Error: " + e.getMessage());
@@ -54,11 +52,9 @@ public class SerializationGuardDemo implements Serializable {
         
         System.out.println("\n3. Deserializing from bytes...");
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        SerializationGuardDemo deserialized = null;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(bais);
+        SerializationGuardDemo deserialized;
+        try (ObjectInputStream ois = new ObjectInputStream(bais)) {
             deserialized = (SerializationGuardDemo) ois.readObject();
-            ois.close();
             System.out.println("   Deserialized: " + deserialized.getIdentity());
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("   Error: " + e.getMessage());

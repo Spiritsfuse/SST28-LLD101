@@ -1,4 +1,3 @@
-package com.example.metrics;
 
 import java.io.FileInputStream;
 import java.io.IOException;

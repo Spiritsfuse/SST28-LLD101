@@ -1,5 +1,4 @@
-import com.example.tickets.IncidentTicket;
-import com.example.tickets.TicketService;
+package com.example.tickets;
 
 import java.util.List;
 

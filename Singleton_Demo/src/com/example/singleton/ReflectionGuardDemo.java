@@ -1,6 +1,7 @@
 package com.example.singleton;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * ReflectionGuardDemo shows how the singleton pattern can be attacked through reflection
@@ -60,11 +61,14 @@ public class ReflectionGuardDemo {
             // Should not reach here
             System.out.println("   ✗ FAILED: Reflection created a second instance!");
             System.out.println("   ✗ instance2: " + instance2.getIdentity());
-        } catch (InstantiationException e) {
-            System.out.println("   ✓ BLOCKED: " + e.getCause().getMessage());
+        } catch (InstantiationException | InvocationTargetException e) {
+            if (e.getCause() != null) {
+                System.out.println("   ✓ BLOCKED: " + e.getCause().getMessage());
+            } else {
+                System.out.println("   ✓ BLOCKED: " + e.getClass().getSimpleName());
+            }
         } catch (Exception e) {
-            System.out.println("   ✓ BLOCKED: " + e.getClass().getSimpleName() + 
-                             " - " + e.getCause().getMessage());
+            System.out.println("   ✓ BLOCKED: " + e.getClass().getSimpleName());
         }
         
         System.out.println("\n3. Verifying singleton is still intact...");

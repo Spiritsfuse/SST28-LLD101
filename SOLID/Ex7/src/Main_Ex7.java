@@ -1,4 +1,4 @@
-public class Main {
+public class Main_Ex7 {
     public static void main(String[] args) {
         System.out.println("=== Smart Classroom ===");
         DeviceRegistry reg = new DeviceRegistry();
