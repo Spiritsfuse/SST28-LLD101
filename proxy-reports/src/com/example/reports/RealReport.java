@@ -1,8 +1,8 @@
 package com.example.reports;
 
 /**
- * TODO (student):
- * Extract expensive loading logic from ReportFile into this RealSubject.
+ * RealSubject: Contains the expensive file-reading logic.
+ * This is only created when a user is authorized and requests access.
  */
 public class RealReport implements Report {
 
@@ -14,11 +14,23 @@ public class RealReport implements Report {
         this.reportId = reportId;
         this.title = title;
         this.classification = classification;
+        System.out.println("[RealReport] Constructing RealReport for " + reportId);
     }
 
     @Override
     public void display(User user) {
-        System.out.println("TODO: implement via real loading");
+        String content = loadFromDisk();
+        System.out.println("REPORT -> id=" + reportId
+                + " title=" + title
+                + " classification=" + classification
+                + " openedBy=" + user.getName());
+        System.out.println("CONTENT: " + content);
+    }
+
+    private String loadFromDisk() {
+        System.out.println("[disk] loading report " + reportId + " ...");
+        try { Thread.sleep(120); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        return "Internal report body for " + title;
     }
 
     public String getClassification() {

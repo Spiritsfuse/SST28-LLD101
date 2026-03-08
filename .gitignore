@@ -21,6 +21,9 @@ SOLID/LLD_MASTER.md
 SOLID/*/SOLUTION.md
 immutable-tickets/SOLUTION.md
 singleton-metrics/SOLUTION.md
+proxy-reports/SOLUTION.md
+adapter-payments/SOLUTION.md
+flyweight-markers/SOLUTION.md
 
 # Explanation and learning documentation
 Singleton_Demo/EXPLANATION.md
@@ -28,8 +31,9 @@ Singleton_Demo/EXPLANATION.md
 **/*_EXPLANATION.md
 GIT_GITHUB_MASTER.md
 
-# Ignore exercises we will handle later (now refactored)
+# Ignored exercises, handled later (now refactored)
 # SOLID/Ex7/
 # SOLID/Ex8/
 # SOLID/Ex9/
 # SOLID/Ex10/
+
