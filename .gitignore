@@ -13,6 +13,7 @@ Thumbs.db
 tmp/
 out/
 build/
+bin/
  
 # Personal learning and notes 
 SOLID/LLD_MASTER.md

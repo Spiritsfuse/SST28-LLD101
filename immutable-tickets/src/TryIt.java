@@ -1,5 +1,3 @@
-package com.example.tickets;
-
 import java.util.List;
 
 /**

@@ -18,7 +18,7 @@ public class EligibilityEngine {
         store.save(s.rollNo, r.status);
     }
 
-    public EligibilityEngineResult evaluate(StudentProfile s) {
+    EligibilityEngineResult evaluate(StudentProfile s) {
         List<String> reasons = new ArrayList<>();
         String status = "ELIGIBLE";
 

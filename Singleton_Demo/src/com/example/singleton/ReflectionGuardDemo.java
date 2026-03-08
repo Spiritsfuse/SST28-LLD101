@@ -67,7 +67,7 @@ public class ReflectionGuardDemo {
             } else {
                 System.out.println("   ✓ BLOCKED: " + e.getClass().getSimpleName());
             }
-        } catch (Exception e) {
+        } catch (NoSuchMethodException | IllegalAccessException | SecurityException e) {
             System.out.println("   ✓ BLOCKED: " + e.getClass().getSimpleName());
         }
         
