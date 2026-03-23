@@ -2,11 +2,107 @@
 
 This module demonstrates a low-level design for a Parking Lot system using Java packages and a modular class structure.
 
-## UML Diagram Placeholder
+## UML Diagram (Schema View)
 
-Add your screenshot/image here:
+![parking-lot-UML-mermaid-diagram](../UML-diagrams/parking-lot-UML-mermaid-diagram.png)
 
-`[Place ParkingLot UML diagram image here]`
+## Class Diagram (Code-Level)
+
+```mermaid
+classDiagram
+	class ParkingLot {
+		-int levels
+		-SlotManager slotManager
+		-List~Gate~ gates
+		-Map~UUID,Ticket~ tickets
+		-PriceStrategy priceStrategy
+		+parkVehicle(vehicle, gate) void
+		+exit(ticketId) double
+		+slotStatus(slots) void
+	}
+
+	class SlotManager {
+		-List~Slot~ slots
+		-SlotStrategy slotStrategy
+		+findSlot(vehicleType, gate) Slot
+		+releaseSlot(slot) void
+	}
+
+	class SlotStrategy {
+		<<interface>>
+		+allocateSlot(vehicleType, gate, slots) Slot
+	}
+
+	class NearestSlotFromLevel {
+		+allocateSlot(vehicleType, gate, slots) Slot
+	}
+
+	class PriceStrategy {
+		<<interface>>
+		+calculatePrice(ticket) double
+	}
+
+	class HourlyPrice {
+		+calculatePrice(ticket) double
+	}
+
+	class NightPrice {
+		+calculatePrice(ticket) double
+	}
+
+	class WeekendPrice {
+		+calculatePrice(ticket) double
+	}
+
+	class Slot {
+		-UUID slotId
+		-int level
+		-SlotType slotType
+		-boolean occupied
+		-Map~Gate,Integer~ distanceFromGate
+	}
+
+	class Ticket {
+		-UUID ticketId
+		-LocalDateTime entryTime
+		-Slot slot
+		-Vehicle vehicle
+	}
+
+	class Vehicle {
+		-String vehicleNumber
+		-VehicleType vehicleType
+	}
+
+	class Gate {
+		-int gateId
+		-int level
+	}
+
+	SlotStrategy <|.. NearestSlotFromLevel
+	PriceStrategy <|.. HourlyPrice
+	PriceStrategy <|.. NightPrice
+	PriceStrategy <|.. WeekendPrice
+
+	ParkingLot --> SlotManager
+	ParkingLot --> PriceStrategy
+	ParkingLot --> Ticket
+	ParkingLot --> Gate
+	SlotManager --> SlotStrategy
+	SlotManager --> Slot
+	Ticket --> Slot
+	Ticket --> Vehicle
+	Slot --> Gate
+```
+
+## LLD Design
+
+- Strategy pattern is used in two places:
+  - `SlotStrategy` for pluggable slot allocation logic.
+  - `PriceStrategy` for pluggable billing policies.
+- `ParkingLot` is a service facade coordinating ticket lifecycle, pricing, and slot release.
+- `SlotManager` encapsulates slot inventory operations so `ParkingLot` remains focused on flow.
+- Domain entities (`Ticket`, `Slot`, `Vehicle`, `Gate`) are simple state carriers used by services.
 
 ## What Is Implemented
 

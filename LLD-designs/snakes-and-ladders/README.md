@@ -2,11 +2,94 @@
 
 This module implements a Snake and Ladder game using object-oriented LLD and follows the provided UML structure.
 
-## UML Diagram Placeholder
+## UML Diagram (Schema View)
 
-Add your screenshot/image here:
+![snakes-and-ladders-UML-mermaid-diagram](../UML-diagrams/snakes-and-ladders-UML-mermaid-diagram.png)
 
-`[Place Snake and Ladder UML diagram image here]`
+## Class Diagram (Code-Level)
+
+```mermaid
+classDiagram
+  class GameMode {
+    <<interface>>
+    +makeMove(player, dice, board) TurnResult
+    +getName() String
+  }
+
+  class EasyMode {
+    +makeMove(player, dice, board) TurnResult
+  }
+
+  class HardMode {
+    +makeMove(player, dice, board) TurnResult
+  }
+
+  class Game {
+    -Board board
+    -Queue~Player~ players
+    -List~Player~ winners
+    -GameMode mode
+    -Dice dice
+    +runGame() void
+    +makeTurn() void
+    +isWinner(player) boolean
+    +isGameOver() boolean
+  }
+
+  class Board {
+    -int size
+    -Map~Integer,Integer~ snakes
+    -Map~Integer,Integer~ ladders
+    +createRandomSnakes(count, occupied, jumps) Map~Integer,Integer~
+    +createRandomLadders(count, occupied, jumps) Map~Integer,Integer~
+    +resolveJump(position) int
+    +getLastCell() int
+  }
+
+  class Player {
+    -int playerId
+    -String name
+    -int position
+    +makeTurn(mode, dice, board) TurnResult
+  }
+
+  class Dice {
+    +rollDice() int
+  }
+
+  class TurnResult {
+    -int startPosition
+    -int endPosition
+    -List~Integer~ rolls
+    -boolean forfeited
+  }
+
+  class GameFactory {
+    +createGame(n, playerCount, version) Game
+  }
+
+  EasyMode ..|> GameMode
+  HardMode ..|> GameMode
+
+  Game --> Board
+  Game --> Dice
+  Game --> GameMode
+  Game --> Player
+
+  Player --> GameMode
+  Player --> Dice
+  Player --> Board
+
+  GameFactory --> Game
+```
+
+## LLD Design
+
+- `Game` is the orchestrator and owns the turn queue, board, dice, and game mode strategy.
+- Strategy pattern is used with `GameMode` to support easy and hard rules without changing `Game`.
+- `Board` encapsulates random snake/ladder generation and jump resolution, including constraints.
+- `TurnResult` captures roll sequence + result of a turn, making turn flow explicit and testable.
+- `GameFactory` centralizes object construction from input parameters (`n`, `x`, `version`).
 
 ## What Is Implemented
 

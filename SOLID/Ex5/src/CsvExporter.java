@@ -10,7 +10,8 @@ public class CsvExporter extends Exporter {
     }
 
     private String escape(String s) {
-        if (s == null) return "";
+        if (s == null)
+            return "";
         String v = s.replace("\"", "\"\"");
         if (v.contains(",") || v.contains("\n") || v.contains("\"")) {
             return "\"" + v + "\"";

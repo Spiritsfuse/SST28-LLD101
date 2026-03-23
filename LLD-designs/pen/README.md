@@ -2,11 +2,107 @@
 
 This module implements a flexible Pen design using LLD with Strategy + Decorator patterns, aligned to your UML.
 
-## UML Diagram Placeholder
+## UML Diagram (Schema View)
 
-Add your screenshot/image here:
+![pen-UML-mermaid-diagram](../UML-diagrams/pen-UML-mermaid-diagram.png)
 
-`[Place Pen UML diagram image here]`
+## Class Diagram (Code-Level)
+
+```mermaid
+classDiagram
+  class Pen {
+    <<abstract>>
+    -String color
+    -RefillStrategy refillStrategy
+    -StartStrategy startStrategy
+    -boolean started
+    -int inkLevel
+    +write(text) void
+    +refill(newColor) void
+    +start() void
+    +close() void
+  }
+
+  class InkPen {
+    +write(text) void
+  }
+
+  class BallPen {
+    +write(text) void
+  }
+
+  class GelPen {
+    +write(text) void
+  }
+
+  class PenDecorator {
+    <<abstract>>
+    #Pen pen
+    +write(text) void
+    +refill(newColor) void
+    +start() void
+    +close() void
+  }
+
+  class GripDecorator {
+    +start() void
+    +write(text) void
+  }
+
+  class RefillStrategy {
+    <<interface>>
+    +refill(pen, color) void
+  }
+
+  class SimpleRefill {
+    +refill(pen, color) void
+  }
+
+  class StartStrategy {
+    <<interface>>
+    +start(pen) void
+  }
+
+  class CapStart {
+    +start(pen) void
+  }
+
+  class ClickStart {
+    +start(pen) void
+  }
+
+  class PenFactory {
+    +createPen(penType, mechanism, color, withGrip) Pen
+  }
+
+  Pen <|-- InkPen
+  Pen <|-- BallPen
+  Pen <|-- GelPen
+  Pen <|-- PenDecorator
+  PenDecorator <|-- GripDecorator
+
+  RefillStrategy <|.. SimpleRefill
+  StartStrategy <|.. CapStart
+  StartStrategy <|.. ClickStart
+
+  Pen --> RefillStrategy
+  Pen --> StartStrategy
+  PenDecorator --> Pen
+  PenFactory --> Pen
+```
+
+## LLD Design
+
+- Decorator pattern:
+  - `PenDecorator` wraps a `Pen` and forwards all behavior.
+  - `GripDecorator` augments start/write without changing base pen classes.
+- Strategy pattern:
+  - `StartStrategy` handles cap vs click mechanism.
+  - `RefillStrategy` handles refill behavior and color update.
+- Base abstraction (`Pen`) enforces lifecycle and constraints:
+  - `start()` must be called before `write()`.
+  - refill resets ink to 100%.
+  - concrete pens provide distinct write behavior.
 
 ## What Is Implemented
 
