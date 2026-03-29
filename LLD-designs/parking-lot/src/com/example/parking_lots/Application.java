@@ -1,4 +1,4 @@
-package src.com.example.parking_lots;
+package com.example.parking_lots;
 
 import java.util.ArrayList;
 import java.util.HashMap;

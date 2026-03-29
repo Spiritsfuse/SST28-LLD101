@@ -46,7 +46,7 @@ Get-ChildItem -Path src\com\example\parking_lots -Filter *.java | ForEach-Object
 Run the application with its fully qualified class name (replace package/class if different in your source):
 
 ```bash
-java src.com.example.parking_lots.Application
+java -cp src com.example.parking_lots.Application
 ```
 
 ## Notes

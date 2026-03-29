@@ -7,9 +7,11 @@ This parent folder groups the standalone low-level design demos in this reposito
 - `parking-lot`
 - `snakes-and-ladders`
 - `pen`
+- `book-my-show`
+- `elevator`
 
 Each module contains:
 
 - complete Java source under `src/`
 - its own `README.md`
-- UML placeholder section for diagram screenshots
+- UML/Class diagram documentation aligned with implementation

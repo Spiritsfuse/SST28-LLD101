@@ -1,15 +1,15 @@
-package src.com.example.parking_lots;
+package com.example.parking_lots;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class ParkingLot {
-    private int levels;
-    private SlotManager slotManager;
-    private List<Gate> gates;
-    private Map<UUID, Ticket> tickets;
-    private PriceStrategy priceStrategy;
+    private final int levels;
+    private final SlotManager slotManager;
+    private final List<Gate> gates;
+    private final Map<UUID, Ticket> tickets;
+    private final PriceStrategy priceStrategy;
     public ParkingLot(int levels, SlotManager slotManager, List<Gate> gates, Map<UUID, Ticket> tickets, PriceStrategy priceStrategy) {
         this.levels = levels;
         this.slotManager = slotManager;
@@ -39,6 +39,7 @@ public class ParkingLot {
         return amount;
     }
     public void slotStatus(List<Slot> slots) {
+        System.out.println("ParkingLot summary: levels=" + levels + ", gates=" + gates.size());
         for (Slot slot : slots) {
             System.out.println("Slot ID: " + slot.getSlotId() + ", Level: " + slot.getLevel() + ", Type: " + slot.getSlotType() + ", Occupied: " + slot.isOccupied());
         }

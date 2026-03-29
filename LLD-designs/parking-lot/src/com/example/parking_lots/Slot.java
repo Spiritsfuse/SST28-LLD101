@@ -1,13 +1,13 @@
-package src.com.example.parking_lots;
+package com.example.parking_lots;
 import java.util.Map;
 import java.util.UUID;
 
 public class Slot {
-    private UUID slotId;
-    private int level;
-    private SlotType slotType;
+    private final UUID slotId;
+    private final int level;
+    private final SlotType slotType;
     private boolean occupied;
-    private Map<Gate, Integer> distanceFromGate;
+    private final Map<Gate, Integer> distanceFromGate;
     public Slot(int level, SlotType slotType, Map<Gate, Integer> distanceFromGate) {
         this.slotId = UUID.randomUUID();
         this.level = level;

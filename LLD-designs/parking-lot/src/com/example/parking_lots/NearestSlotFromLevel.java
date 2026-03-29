@@ -1,4 +1,4 @@
-package src.com.example.parking_lots;
+package com.example.parking_lots;
 
 import java.util.EnumSet;
 import java.util.List;

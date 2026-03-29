@@ -1,4 +1,4 @@
-package src.com.example.parking_lots;
+package com.example.parking_lots;
 public class Vehicle {
     private String vehicleNumber;
     private VehicleType vehicleType;
