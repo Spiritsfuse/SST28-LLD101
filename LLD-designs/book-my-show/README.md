@@ -6,19 +6,19 @@ This module implements a movie ticket booking system with separate admin/custome
 
 ```mermaid
 flowchart TB
-    A[Admin API<br/>addMovie()<br/>addTheater()<br/>addMovieShow()]
-    C[Customer API<br/>bookTicket()<br/>showTheater()<br/>showMovie()<br/>cancelMovie()]
+    A[Admin API: addMovie, addTheater, addMovieShow]
+    C[Customer API: bookTicket, showTheater, showMovie, cancelMovie]
 
     SYS[BookMyShowSystem]
 
     M[Movie]
     T[Theater]
     AUD[Auditorium]
-    SH[Show<br/>showId + timing + theater + auditorium]
+    SH[Show: showId + timing + theater + auditorium]
     ST[Seat]
     TK[Ticket]
 
-    PG[PaymentGateway<br/>(external service)]
+    PG[PaymentGateway external service]
     MP[MockPaymentGateway]
 
     A --> SYS
