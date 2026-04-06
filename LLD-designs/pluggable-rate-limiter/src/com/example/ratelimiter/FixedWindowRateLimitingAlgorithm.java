@@ -16,8 +16,8 @@ public class FixedWindowRateLimitingAlgorithm implements RateLimitingAlgorithm {
     public RateLimitDecision evaluateAndConsume(String rateKey, List<RateLimitRule> rules, long nowMillis) {
         Object lock = lockProvider.lockForKey(rateKey);
         synchronized (lock) {
-            Map<RateLimitRule, FixedWindowState> perRule =
-                    stateByKey.computeIfAbsent(rateKey, ignored -> new ConcurrentHashMap<>());
+            Map<RateLimitRule, FixedWindowState> perRule = stateByKey.computeIfAbsent(rateKey,
+                    ignored -> new ConcurrentHashMap<>());
 
             for (RateLimitRule rule : rules) {
                 FixedWindowState state = perRule.computeIfAbsent(rule, ignored -> new FixedWindowState());

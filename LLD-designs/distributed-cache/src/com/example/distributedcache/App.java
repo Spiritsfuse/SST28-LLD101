@@ -15,8 +15,7 @@ public class App {
                 2,
                 new ModuloDistributionStrategy<>(),
                 LruEvictionPolicy::new,
-                database
-        );
+                database);
 
         System.out.println("=== Cache miss then DB read-through ===");
         String user1 = cache.get("user:1");
@@ -29,12 +28,11 @@ public class App {
         System.out.println("=== LRU eviction at a single node (capacity=2) ===");
         InMemoryDatabase<Integer, String> intDb = new InMemoryDatabase<>();
         DistributedCache<Integer, String> intCache = new DistributedCache<>(
-            3,
-            2,
-            new ModuloDistributionStrategy<>(),
-            LruEvictionPolicy::new,
-            intDb
-        );
+                3,
+                2,
+                new ModuloDistributionStrategy<>(),
+                LruEvictionPolicy::new,
+                intDb);
 
         // Keys 0, 3, and 6 all route to node 0 for modulo-3 distribution.
         intCache.put(0, "K0");
@@ -54,8 +52,7 @@ public class App {
                 2,
                 new MapBasedDistributionStrategy<>(explicitRouting, new ModuloDistributionStrategy<>()),
                 LruEvictionPolicy::new,
-                database
-        );
+                database);
 
         routedCache.put("tenant:premium", "pinned-node-0");
         System.out.println("tenant:premium routed to node " + routedCache.getNodeIndexForKey("tenant:premium"));

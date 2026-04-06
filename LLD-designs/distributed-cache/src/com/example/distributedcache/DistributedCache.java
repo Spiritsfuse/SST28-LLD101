@@ -15,8 +15,7 @@ public class DistributedCache<K, V> {
             int nodeCapacity,
             DistributionStrategy<K> distributionStrategy,
             Supplier<EvictionPolicy<K>> evictionPolicyFactory,
-            Database<K, V> database
-    ) {
+            Database<K, V> database) {
         if (numberOfNodes <= 0) {
             throw new IllegalArgumentException("numberOfNodes must be positive");
         }

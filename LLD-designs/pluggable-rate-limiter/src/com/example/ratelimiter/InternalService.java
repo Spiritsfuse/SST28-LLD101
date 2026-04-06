@@ -10,8 +10,7 @@ public class InternalService {
     public InternalService(
             ExternalCallRateLimiter rateLimiter,
             ExternalProviderClient externalProviderClient,
-            List<RateLimitRule> rules
-    ) {
+            List<RateLimitRule> rules) {
         this.rateLimiter = rateLimiter;
         this.externalProviderClient = externalProviderClient;
         this.rules = rules;

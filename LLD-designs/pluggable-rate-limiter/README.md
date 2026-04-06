@@ -86,37 +86,44 @@ classDiagram
 ## Key Design Decisions
 
 1. Strategy Pattern for algorithm pluggability
+
 - `RateLimitingAlgorithm` is the extension point.
 - `RateLimiterEngine` can switch algorithm at runtime using `switchAlgorithm(...)`.
 - Business logic (`InternalService`) remains unchanged.
 
 2. Clean separation of concerns
+
 - `InternalService` owns business flow.
 - `RateLimiterEngine` is orchestration + validation.
 - Algorithm classes own state and admission logic.
 
 3. Thread safety
+
 - Each algorithm keeps concurrent maps for states.
 - Per-rate-key lock ensures atomic check-and-consume across multiple rules.
 - This avoids partial consumption when one rule passes and another fails.
 
 4. Multi-rule support
+
 - The same key can enforce multiple limits together, for example:
   - `5 / minute`
   - `1000 / hour`
 - A request is allowed only when all configured rules pass.
 
 5. Testability
+
 - `Clock` abstraction allows deterministic simulation (`MutableClock`) in tests/demo.
 
 ## Implemented Algorithms
 
 1. Fixed Window Counter
+
 - Time is partitioned into fixed buckets.
 - Counter resets at bucket boundary.
 - Fast and simple.
 
 2. Sliding Window Counter
+
 - Tracks current and previous window counters.
 - Uses weighted contribution from previous window for smoother limiting.
 - Reduces boundary burstiness compared to fixed window.

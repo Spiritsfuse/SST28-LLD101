@@ -10,19 +10,16 @@ public class App {
 
         List<RateLimitRule> rules = Arrays.asList(
                 new RateLimitRule(5, Duration.ofMinutes(1)),
-                new RateLimitRule(1000, Duration.ofHours(1))
-        );
+                new RateLimitRule(1000, Duration.ofHours(1)));
 
         RateLimiterEngine rateLimiter = new RateLimiterEngine(
                 clock,
-                new FixedWindowRateLimitingAlgorithm()
-        );
+                new FixedWindowRateLimitingAlgorithm());
 
         InternalService internalService = new InternalService(
                 rateLimiter,
                 new ExternalProviderClient(),
-                rules
-        );
+                rules);
 
         System.out.println("Algorithm: " + rateLimiter.currentAlgorithmName());
         runFixedWindowDemo(internalService, clock);

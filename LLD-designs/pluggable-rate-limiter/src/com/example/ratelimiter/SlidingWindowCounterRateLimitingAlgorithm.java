@@ -16,12 +16,12 @@ public class SlidingWindowCounterRateLimitingAlgorithm implements RateLimitingAl
     public RateLimitDecision evaluateAndConsume(String rateKey, List<RateLimitRule> rules, long nowMillis) {
         Object lock = lockProvider.lockForKey(rateKey);
         synchronized (lock) {
-            Map<RateLimitRule, SlidingWindowCounterState> perRule =
-                    stateByKey.computeIfAbsent(rateKey, ignored -> new ConcurrentHashMap<>());
+            Map<RateLimitRule, SlidingWindowCounterState> perRule = stateByKey.computeIfAbsent(rateKey,
+                    ignored -> new ConcurrentHashMap<>());
 
             for (RateLimitRule rule : rules) {
-                SlidingWindowCounterState state =
-                        perRule.computeIfAbsent(rule, ignored -> new SlidingWindowCounterState());
+                SlidingWindowCounterState state = perRule.computeIfAbsent(rule,
+                        ignored -> new SlidingWindowCounterState());
                 if (!state.canConsume(rule, nowMillis)) {
                     return RateLimitDecision.deny("SlidingWindow limit exceeded for rule: " + rule);
                 }
