@@ -9,6 +9,8 @@ This parent folder groups the standalone low-level design demos in this reposito
 - `pen`
 - `book-my-show`
 - `elevator`
+- `distributed-cache`
+- `pluggable-rate-limiter`
 
 Each module contains:
 
